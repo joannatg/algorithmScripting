@@ -1,0 +1,52 @@
+
+function permutateArray(array) {
+  var results = [];
+
+  function getPermutations(arr, z) {
+    var item; 
+        z = z || [];
+
+    for (var i = 0; i < arr.length; i++) {
+      item = arr.splice(i, 1);
+      if (arr.length === 0) {
+        results.push(z.concat(item));
+      }
+      getPermutations(arr.slice(), z.concat(item));
+      arr.splice(i, 0, item[0]);
+    }
+
+    return results;
+  }
+
+  return getPermutations(array);
+}
+
+
+function getNumberOfPermutatioms(str){
+    var array = str.split("");
+    var result = permutateArray(array);   
+    return result;
+   
+}
+
+
+function permAlone(str) {
+  
+  var perms = getNumberOfPermutatioms(str);
+  for (var i = 0; i < perms.length; i++) {
+    var arr = perms[i];
+    for (var j = 0; j < arr.length; j++) {
+      var first = arr[j];
+      var next = arr[j+1];
+      if(first === next){
+        var r = perms.indexOf(arr);
+        perms.splice(r, 1);
+        i--;
+        break;
+      }     
+    }
+     
+  }
+      return perms.length;
+}
+permAlone('aab');
