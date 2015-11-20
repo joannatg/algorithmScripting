@@ -1,0 +1,38 @@
+function replace(str, before, after) {
+    var result = "";
+    var strArray = str.split(" ");
+    
+    for(var i = 0; i<strArray.length; i++){
+        if(strArray[i] === before){
+            var b = before[0];
+             var a = after[0];
+              if(isLowerCase(b)){
+                a = a.toLowerCase();
+              }else if(!isLowerCase(b)){
+                a = a.toUpperCase();
+              }
+            var start = i;
+            var repl = after.replace(after[0], a);
+            strArray.splice(start, 1, repl);
+        }  
+    } result = strArray.join(' ');
+
+    return result;
+}
+
+function isLowerCase(str1){
+     var result = false;
+     var s = '';
+     for (var j = 0; j<str1.length; j++){
+          var a = str1.charAt(j);
+          var t = str1.charCodeAt(j);
+         if((t >= 65) &&(t <= 90)){
+            result = false;
+         } else if ((t >= 97) && (t <= 122)){
+             result = true;
+         }
+     }
+     return result;
+}
+
+replace("A quick brown fox jumped over the lazy dog", "jumped", "leaped");
