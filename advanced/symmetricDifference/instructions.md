@@ -1,3 +1,3 @@
-<p>Create a function that takes two or more arrays and returns an array of the symmetric difference of the provided arrays.
+<p>Create a function that takes two or more arrays and returns an array of the symmetric difference of the provided arrays.</p>
 
-The mathematical term symmetric difference refers to the elements in two sets that are in either the first or second set, but not in both.</p>
+<p>The mathematical term symmetric difference refers to the elements in two sets that are in either the first or second set, but not in both.</p>
