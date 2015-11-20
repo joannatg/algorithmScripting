@@ -1,0 +1,32 @@
+function convert(num) {
+ var results = [];
+    var total = num;
+   
+    var arabics = [1, 4, 5, 9, 10, 40, 50, 90, 100, 400, 500, 900, 1000];
+    var romans = ["I", "IV", "V", "IX", "X", "XL", "L", "XC", "C", "CD", "D", "DM", "M"];
+    var amax = arabics[arabics.length-1];
+    var rmax = romans[romans.length-1];
+
+
+    var i = 0;
+    while (total > 0) {
+        var value = arabics[i];
+         if(total >= amax){
+            results.push(rmax);
+            total -= amax;
+            i=0;
+         }
+             if(total >= value){
+              i++;         
+        }
+         if(total <= value){
+            results.push(romans[i-1]);
+            var item = arabics[i-1];
+            total -= item;
+            i=0;
+         }                               
+    }
+   return results.join('');
+}
+
+convert(36);
