@@ -1,6 +1,6 @@
-Return true if the passed string is a valid US phone number
+<p>Return true if the passed string is a valid US phone number.</p>
 
-The user may fill out the form field any way they choose as long as it is a valid US number. The following are all valid formats for US numbers:
+<p>The user may fill out the form field any way they choose as long as it is a valid US number. The following are all valid formats for US numbers:</p>
 
 555-555-5555
 
