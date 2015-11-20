@@ -1,0 +1,24 @@
+function orbitalPeriod(arr) {
+    var results = [];
+  var GM = 398600.4418;
+  var earthRadius = 6367.4447;
+
+   for(var i = 0; i<arr.length; i++){
+       var elem = arr[i];
+       
+      if(elem.hasOwnProperty("name") && elem.hasOwnProperty("avgAlt")){         
+          var obj = {};
+          obj.name = elem.name;
+
+          var h = elem.avgAlt+earthRadius;
+          var v = Math.sqrt(GM/h);
+          var p = 2*Math.PI*h/v;
+                  
+          obj.orbitalPeriod = Math.round(p);
+
+          results.push(obj);
+      }
+  }
+  return results;
+}
+orbitalPeriod([{name : "sputnik", avgAlt : 35873.5553}]);
