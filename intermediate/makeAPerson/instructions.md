@@ -1,6 +1,6 @@
-<p>Fill in the object constructor with the methods specified in the tests.
+<p>Fill in the object constructor with the methods specified in the tests.</p>
 
-Those methods are getFirstName(), getLastName(), getFullName(), setFirstName(first), setLastName(last), and setFullName(firstAndLast).
+<p>Those methods are getFirstName(), getLastName(), getFullName(), setFirstName(first), setLastName(last), and setFullName(firstAndLast).
 
 All functions that take an argument have an arity of 1, and the argument will be a string.
 
