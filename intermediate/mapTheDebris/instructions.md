@@ -1,6 +1,6 @@
-<p>Return a new array that transforms the element's average altitude into their orbital periods.
+<p>Return a new array that transforms the element's average altitude into their orbital periods.</p>
 
-The array will contain objects in the format {name: 'name', avgAlt: avgAlt}.
+<p>The array will contain objects in the format {name: 'name', avgAlt: avgAlt}.
 
 You can read about orbital periods on wikipedia.
 
