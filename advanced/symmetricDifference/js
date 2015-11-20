@@ -1,0 +1,77 @@
+function isElemInArray(elem, array){
+    var result = false;
+      for(var j = 0; j<array.length; j++){
+        var item = array[j];
+        if(item === elem){
+           result = true;
+           break;
+       } 
+    }
+    return result;
+}
+function getSymDiffOfTwoSets(set1, set2) {
+    var results = [];
+    var m = set2;
+    var n = [];
+  for(var i = 0; i<set1.length; i++){
+        var elem = set1[i];
+          if(isElemInArray(elem, set2)){
+           c = getIndexesOfElemInArray(elem, set2);
+           m = set2.splice(c, 1);          
+          } else if(! isElemInArray(elem, set2)){
+          n.push(elem);
+          } 
+   }  results = n.concat(set2);
+  return results;
+}
+function getIndexesOfElemInArray(elem, arr){
+    var indexes = [];
+     for(var j = 0; j<arr.length; j++){
+        var item = arr[j];
+        var pos = j;
+         if(item==elem){
+           indexes.push(pos);
+        }
+    }
+   return indexes;
+}
+
+function removeDuplicates(cars){
+    var newCars = [];
+    var duplicates = [];
+    for(var i = 0; i<cars.length; i++){
+        var car = cars[i];
+       
+        if(!isElemInArray(car, newCars)){
+             newCars.push(car);
+        }else {      
+             duplicates.push(car);
+        }     
+    }
+  return newCars;
+}
+function sym() {
+    var results = [];
+    var count = 0;
+    var e = arguments[0];
+    var f = arguments[1]; 
+        
+    if (arguments.length <= 2){
+        arguments === e;
+        var p = e[0]; 
+        var r = e[1];
+        results = getSymDiffOfTwoSets(p, r);       
+    }
+  for (var z = 0; z<arguments.length-1; z++){
+          
+   var e = removeDuplicates(e); 
+       f = removeDuplicates(f);
+       results = getSymDiffOfTwoSets(e, f);
+       count++;
+       e = results;
+       f = arguments[1+count];
+  }   
+     return results;
+}
+sym([1, 1]);
+
