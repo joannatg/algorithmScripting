@@ -1,0 +1,21 @@
+function sumAll(arr) {
+  
+  var sum = 0;
+  var first = Math.min.apply(Math, arr);
+  var last = Math.max.apply(Math, arr);
+
+  var nums = [];
+  for(var i = first ; i <=last; i++) {
+     nums.push(i);
+    
+    }
+    
+    function myReduce(sum, num, i, nums){
+        return sum + num;
+    }
+
+ sum = nums.reduce(myReduce, 0);
+  
+    return sum;
+}
+sumAll([1, 4]);
