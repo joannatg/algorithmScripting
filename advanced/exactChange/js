@@ -1,0 +1,155 @@
+
+function getSum(arr){
+  var sum = 0;
+  for(var i =0; i< arr.length; i++){
+     var denom = arr[i];
+     var amount = denom[1];
+     sum += amount;
+}
+return sum;
+}
+function getAlternativeCurrency(arr1, arr2){
+   var result = [];   
+   var sum = getSum(arr2);
+   var s = getSum(result);
+   
+  for(var i = arr2.length;  i--;){
+     var denom = arr2[i];
+     var d = denom[0];
+     var amount = denom[1];
+     if(sum<arr1[1]){
+      result = [];
+      break;
+     }if(d===arr1[0] && arr1[1]<=amount){
+       denom.splice(1,1, arr1[1]);
+       result.push(denom);
+       break;
+     }if(d===arr1[0] && amount<arr1[1]){
+       var shortArr = arr2.slice(0, i);
+       for(var g = 0; g<shortArr.length; g++){
+         var elem = shortArr[g];
+         if(elem[1]>arr1[1]){
+           elem.splice(1,1, arr1[1]);
+           result.push(elem);
+           break;
+         } 
+       }
+     }if(d!==arr1[0] && amount>arr1[1]){
+       denom.splice(1,1, arr1[1]);
+       result.push(denom);
+       break;
+     }
+  }
+     return result;
+}
+function getAlternativeChange(arr, cid){
+  var result = [];
+  for(var i = cid.length;  i--;){
+    var denomination = cid[i];
+    var value = denomination[0];
+    var amount = denomination[1];
+    for(var j = 0; j<arr.length; j++){
+      var v = arr[0];
+      var a = arr[1];
+      if(value === v && amount<a){       
+       var shortArr = cid.slice(0, i);
+       var r = getAlternativeCurrency(arr, shortArr);
+       result = r;
+       break; 
+      } 
+    }
+  }
+  var flattened = result.reduce(function(a, b) {
+  return a.concat(b);
+});
+      return flattened;
+} 
+
+function drawer(price, cash, cid) {
+  
+  // Total Amount to return to client
+  var totalChange = +(cash - price).toFixed(2);
+
+  //Standard currency Value
+  var stdCurr = [0.01, 0.05, 0.10, 0.25, 1, 5, 10, 20, 100];
+
+  //Name of current currency
+  var currType;
+
+  // How many of the current standard currency
+  var stdCurrAmount;
+  var currCurrency;
+
+  // Change to be returned in proper format.
+  var changeArr = [];
+
+  var totalCash = +cid.map(function(money) {
+    // Gets 1D array of values
+    return money[1];
+  }).reduce(function(cash1, cash2) {
+    // Reduces the values to one number
+    return cash1 + cash2;
+
+    // Rounds to two decimal places
+  }).toFixed(2);
+
+  // Handle the case where we don't have enough money or will be left without money.
+  if (totalChange > totalCash) {
+    return 'Insufficient Funds';
+  } else if (totalChange === totalCash) {
+    return 'Closed';
+  }
+
+  // Loops array from right to left.
+  for (var i = +cid.length - 1; i >= 0; i--) {
+    // Gets the monetary value of the current array and the type.
+    currCurrency = +cid[i][1].toFixed(2);
+    currType = cid[i][0];
+
+    //If the currency is less than the change left to hand then get the right amount from the current type of change.
+    if (+stdCurr[i].toFixed(2) <= +totalChange.toFixed(2)) {
+
+      stdCurrAmount = Math.floor(currCurrency / stdCurr[i]);
+
+      if ((stdCurr[i] * stdCurrAmount) >= totalChange) {
+        stdCurrAmount = Math.floor(totalChange / stdCurr[i]);
+      }
+     /*if ((stdCurr[i] * stdCurrAmount) < totalChange) {
+        return "Insufficient Funds";
+        
+      }*/
+      if (+stdCurr[i].toFixed(2) >= +totalChange.toFixed(2)) {
+        var alt = getAlternativeChange(changeArr, cid);       
+        return alt;
+      }
+
+      //Get the current currency to use and update the amount left to hand out.
+      currCurrency = +(stdCurr[i] * stdCurrAmount).toFixed(2);
+      totalChange = +(totalChange - currCurrency).toFixed(2);
+
+      // Update the values so we always have the current amount left in the register.
+      cid[i][1] = currCurrency;
+
+      //Push the change right change to hand out
+      changeArr.push([currType, currCurrency]);
+    }
+  }if (getSum(changeArr)<totalChange){
+      return "Insufficient Funds";
+  }
+
+ 
+  return changeArr;
+}
+
+// Example cash-in-drawer array:
+// [["PENNY", 1.01],
+// ["NICKEL", 2.05],
+// ["DIME", 3.10],
+// ["QUARTER", 4.25],
+// ["ONE", 90.00],
+// ["FIVE", 55.00],
+// ["TEN", 20.00],
+// ["TWENTY", 60.00],
+// ["ONE HUNDRED", 100.00]]
+
+drawer(19.50, 20.00, [["PENNY", 1.01], ["NICKEL", 2.05], ["DIME", 3.10], ["QUARTER", 4.25], ["ONE", 90.00], ["FIVE", 55.00], ["TEN", 20.00], ["TWENTY", 60.00], ["ONE HUNDRED", 100.00]]);
