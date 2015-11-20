@@ -1,0 +1,29 @@
+var Person = function(firstAndLast) {
+    
+     var fullName = firstAndLast,
+         names = fullName.split(' ');
+
+  this.getFirstName = function (){ 
+    return names[0];};
+  this.getLastName = function (){
+  return names[1];
+  };
+  this.getFullName = function (){
+  return fullName;
+  };
+ 
+  this.setFirstName = function (first){
+  names[0] = first;
+  };
+  this.setLastName = function (last){
+  names[1]= last;
+  };
+  this.setFullName = function (firstAndLast){
+  fullName =  firstAndLast;
+  };
+  
+  };
+   
+
+var bob = new Person('Bob Ross');
+bob.getFullName();
