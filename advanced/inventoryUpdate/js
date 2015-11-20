@@ -1,0 +1,67 @@
+function isElementInArray(elem, arr){
+    var result = false;
+    for(var j = 0; j<arr.length; j++){
+        var item = arr[j];
+        var k  = elem[1];
+        var r = item[1];
+          if(r ===k){
+             result=true;
+             break;
+          }
+       }return result;
+ }
+
+function howDoLettersCompare(a,b){
+   if (a[1] < b[1]){ 
+      return -1;
+   }if(a[1] > b[1]){
+     return 1;
+   }
+return 0;
+}
+function inventory(arr1, arr2) {
+    var updatedInv = [];
+   
+   if(arr1.length>0){
+    for(var i = 0; i<arr2.length; i++){
+        var item = arr2[i];
+        var quantity = item[0];
+        var name = item[1];
+       
+       for(var k = 0; k<arr1.length; k++){           
+         var elem = arr1[k];
+         var qArr1 = elem[0];
+         var nArr1 = elem[1];
+         var y = name.localeCompare(nArr1);
+         if(y === 0){
+          arr1[k][0] += arr2[i][0];
+            break;              
+         }if(!isElementInArray(item, arr1)){
+            arr1.push(item);
+            break;
+         }
+       }
+    }updatedInv = arr1;
+     
+   }else{
+          updatedInv = arr2;
+   }
+    updatedInv = updatedInv.sort(howDoLettersCompare);
+    return updatedInv;
+    
+}
+var curInv = [
+    [21, "Bowling Ball"],
+    [2, "Dirty Sock"],
+    [1, "Hair Pin"],
+    [5, "Microphone"]
+];
+
+var newInv = [
+    [2, "Hair Pin"],
+    [3, "Half-Eaten Apple"],
+    [67, "Bowling Ball"],
+    [7, "Toothpaste"]
+];
+
+inventory(curInv, newInv);
