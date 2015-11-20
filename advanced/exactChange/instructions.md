@@ -1,4 +1,4 @@
-<p> Design a cash register drawer function that accepts purchase price as the first argument, payment as the second argument, and cash-in-drawer (cid) as the third argument.
+<p>Design a cash register drawer function that accepts purchase price as the first argument, payment as the second argument, and cash-in-drawer (cid) as the third argument.
 
 cid is a 2d array listing available currency.
 
