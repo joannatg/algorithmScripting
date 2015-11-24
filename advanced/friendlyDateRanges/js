@@ -1,0 +1,105 @@
+function isElementInArray(item, numbers){
+    var result = false;
+    for (var i = 0; i<numbers.length; i++){
+        var number = numbers[i];
+        if(item == number){
+            result = true;
+        }
+    }
+    return result;
+}
+function formatDay(str){
+   var result = " ";
+   var r = str.split("");
+   var values = ["10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "24", "25", "26", "27", "28", "29", "30"];
+   var oneDigVal = ["04", "05", "06", "07", "08", "09"];  
+
+   if(str==="01") {
+       result = r[1]+"st";
+   }if( str==="21"|| str==="31") {
+       result = str+"st";
+   }if(str==="02"){
+       result = r[1] + "nd";
+   }if(str==="22"){
+       result = str+"nd";
+   }if(str==="03"){
+       result = r[1]+"rd";
+   }if(str==="23"){
+       result = str+"rd";
+   }if(isElementInArray(str, values)){
+       result = str+"th";
+   }if(isElementInArray(str, oneDigVal)){
+       result = r[1]+"th";
+   }
+return result;
+
+}
+function friendly(str) {
+    var start = str[0];
+    var end = str[1];
+    var startArr = start.split("-");
+    var sArr = startArr[1].split("");
+    var endArr = end.split("-");
+    var eArr = endArr[1].split("");
+    var months  = ['', 'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];  
+    var result = [];
+    var moStart = "";
+    var dayStart = "";
+    var moEnd = "";
+    var dayEnd = "";
+    var end = "";
+    var yearStart = "";
+    var yearEnd = "";
+    var r = [];
+    var str = [];
+    var x = parseInt(startArr[0]);
+
+    if(sArr[0] == 0){
+        moStart = months[sArr[1]] + " ";
+    }if(sArr[0] != 0){
+        moStart = months[startArr[1]] + " ";
+    }  if(eArr[0] == 0){
+        moEnd = months[eArr[1]] + " ";
+    }if(eArr[0] != 0){
+        moEnd = months[endArr[1]] + " ";
+    } 
+
+    if(startArr[0]===endArr[0] && startArr[1]!== endArr[1]){
+        dayStart = formatDay(startArr[2]);     
+        dayEnd = formatDay(endArr[2]);
+        r = moStart.concat(dayStart);
+        s = moEnd.concat(dayEnd);
+        result.push(r);
+        result.push(s);
+    }if(startArr[0]===endArr[0] && startArr[1]===endArr[1] && startArr[2]!== endArr[2] ){
+        dayStart = formatDay(startArr[2]);
+        end = formatDay(endArr[2]);
+        r = moStart.concat(dayStart);
+        result.push(r);
+        result.push(end);
+    }if(startArr[0]!==endArr[0] && startArr[1]!== endArr[1] ||startArr[0]!==endArr[0] && startArr[1]=== endArr[1]){
+          dayStart = formatDay(startArr[2]);
+          dayEnd = formatDay(endArr[2]);  
+          yearStart = startArr[0];
+          yearEnd = endArr[0]; 
+           if(x+1 === parseInt(endArr[0]) && startArr[1] === "12" && endArr[1] === "02"){
+             r = moStart.concat(dayStart);
+             s = moEnd.concat(dayEnd); 
+            }else {
+              r = moStart.concat(dayStart) + "," + " ".concat(yearStart);
+              s = moEnd.concat(dayEnd) + "," + " ".concat(yearEnd); 
+          }
+        result.push(r);
+        result.push(s);        
+    }
+      if(startArr[0]===endArr[0] && startArr[1]=== endArr[1]&& startArr[2]===endArr[2]){
+        dayStart = formatDay(startArr[2]);
+        yearStart = startArr[0];
+        r = moStart.concat(dayStart) + "," + " ".concat(yearStart);
+        result.push(r);
+    }
+  return result;
+}
+    
+
+friendly(['2015-07-01', '2015-07-04']);
