@@ -1,0 +1,17 @@
+ function chunk(arr, size) {
+ 
+  var mat = [];
+  var n = arr.length;
+  var p = n/size;
+  for (i=0; i<p; i++){
+    mat[i]=[];
+    for (k=0; k<size; k++){
+      j=i*size+k;
+      if (j>=n) break;
+      mat[i].push(arr[j]);
+    }
+  }
+  //*finalArr = arr.slice(0, size);
+  return mat;
+}
+chunk(['a', 'b', 'c', 'd'], 2);
