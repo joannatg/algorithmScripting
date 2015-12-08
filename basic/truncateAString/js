@@ -1,0 +1,16 @@
+function truncate(str, num) {
+  // Clear out that junk in your trunk
+  
+var ts = str;
+   fixpt = '...';
+   
+  if(str.length > num) {
+    ts = str.slice(0, num-3);
+    ts += fixpt;
+    
+  } 
+  
+return ts;
+}
+
+truncate('A-tisket a-tasket A green and yellow basket', 11);
