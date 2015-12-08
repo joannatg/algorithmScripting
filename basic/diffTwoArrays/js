@@ -1,0 +1,32 @@
+function removeElemFromArr(elem, arr) {
+    var results = [];
+    for(i=0; i<arr.length; i++){
+      var a = arr[i];
+      if(elem != a){
+         results.push(a);
+      }
+    }      
+  return results;
+}
+
+function arrayDiff(array1, array2){
+
+   var result =  array2;
+   for(var j = 0; j<array1.length; j++){                                 
+     var a1 = array1[j];
+     result = removeElemFromArr(a1, result);
+  }                 
+  return result;
+}
+
+function diff(a, b) { 
+
+  var result;
+  
+  var a_minus_b = arrayDiff(a, b);     
+  var b_minus_a = arrayDiff(b, a);
+ 
+  result = a_minus_b.concat(b_minus_a);
+  return result;
+}
+arrayDiff([1, 2, 3, 5], [1, 2, 3, 4, 5]);
