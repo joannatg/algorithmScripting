@@ -1,0 +1,9 @@
+function factorialize(num) {
+  var value = 1;
+  for(var i=2; i<=num; i++){
+    value = value * i;
+  }
+  return value;
+}
+
+factorialize(5);
