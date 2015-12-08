@@ -1,0 +1,20 @@
+function where(collection, source) {
+  var arr = [];
+  for( var i = 0; i<collection.length; i++) {
+    var elem = collection[i];
+    var k = Object.keys(elem);
+    for (var j = 0; j<k.length; j++){
+      var key = k[j];
+      if(source.hasOwnProperty(key)){
+        if(elem[key]==source[key]){
+          arr.push(elem);
+          console.log(elem);
+          break;
+        }
+      }
+    }
+  }
+  return arr;
+}
+
+where([{ first: 'Romeo', last: 'Montague' }, { first: 'Mercutio', last: null }, { first: 'Tybalt', last: 'Capulet' }], { last: 'Capulet' });
